@@ -94,7 +94,9 @@ public class QueryUtils {
                 String sectionName=currentNews.getString("sectionName");
                 String webUrl=currentNews.getString("webUrl");
                 String webPublicationDate=currentNews.getString("webPublicationDate");
-                news.add(new News(webTitle, sectionName, webUrl, webPublicationDate));
+                JSONObject tags = currentNews.getJSONObject("fields");
+                String author=tags.getString("byline");
+                news.add(new News(webTitle, sectionName, webUrl, webPublicationDate, author));
             }
         } catch (JSONException e) {
             Log.e("QueryUtils", "Problem parsing the news JSON results", e);

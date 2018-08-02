@@ -5,12 +5,14 @@ public class News {
     private String sectionName;
     private String webUrl;
     private String webPublicationDate;
+    private String author;
 
-    public News(String webTitle, String sectionName, String webUrl, String webPublicationDate) {
+    public News(String webTitle, String sectionName, String webUrl, String webPublicationDate, String author) {
         this.webTitle = webTitle;
         this.sectionName = sectionName;
         this.webUrl = webUrl;
         this.webPublicationDate = webPublicationDate;
+        this.author=author;
     }
 
     public String getWebTitle() {
@@ -28,5 +30,10 @@ public class News {
     public String getWebPublicationDate() {
         return webPublicationDate;
     }
+
+    public String getAuthor() {
+        return author;
+    }
+
 }
 
