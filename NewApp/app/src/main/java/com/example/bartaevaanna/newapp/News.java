@@ -1,6 +1,6 @@
 package com.example.bartaevaanna.newapp;
 
-public class News {
+public class  News {
     private String webTitle;
     private String sectionName;
     private String webUrl;
