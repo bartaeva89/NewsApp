@@ -18,7 +18,11 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
+//public static final int MAX_PASSWORD_SIZE = 7;
 public class QueryUtils {
+    public static final int READTIMEOUT=10000;
+    public static final int CONNECTTIMEOUT=10000;
+    public static final int OK_RESPONSE=200;
     private QueryUtils() {
     }
 
@@ -42,11 +46,11 @@ public class QueryUtils {
         InputStream inputStream = null;
         try {
             urlConnection = (HttpURLConnection) url.openConnection();
-            urlConnection.setReadTimeout(10000 /* milliseconds */);
-            urlConnection.setConnectTimeout(15000 /* milliseconds */);
+            urlConnection.setReadTimeout(READTIMEOUT);
+            urlConnection.setConnectTimeout(CONNECTTIMEOUT);
             urlConnection.setRequestMethod("GET");
             urlConnection.connect();
-            if (urlConnection.getResponseCode() == 200) {
+            if (urlConnection.getResponseCode() == OK_RESPONSE) {
                 inputStream = urlConnection.getInputStream();
                 jsonResponse = readFromStream(inputStream);
             } else {
@@ -95,7 +99,7 @@ public class QueryUtils {
                 String webUrl=currentNews.getString("webUrl");
                 String webPublicationDate=currentNews.getString("webPublicationDate");
                 JSONObject tags = currentNews.getJSONObject("fields");
-                String author=tags.getString("byline");
+                String author=tags.optString("byline");
                 news.add(new News(webTitle, sectionName, webUrl, webPublicationDate, author));
             }
         } catch (JSONException e) {
